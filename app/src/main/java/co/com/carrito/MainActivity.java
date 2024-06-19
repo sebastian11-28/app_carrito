@@ -23,19 +23,19 @@ import co.com.carrito.models.Product;
 public class MainActivity extends AppCompatActivity {
 
     GlobalContext carShoping = GlobalContext.getInstance();
-    public static  List<Product> products  = new ArrayList<>();
-    {
-        products.add(new Product(0, "NIKE SB DUNK", "$100.000 COP", R.drawable.imgtenis, "Nike"));
-        products.add(new Product(1, "NIKE SB DUNK", "$100.000 COP", R.drawable.imgtenis, "Nike"));
-        products.add(new Product(2, "NIKE SB DUNK", "$100.000 COP", R.drawable.imgtenis, "Nike"));
-        products.add(new Product(3, "NIKE SB DUNK", "$100.000 COP", R.drawable.imgtenis, "Nike"));
-        products.add(new Product(4, "NIKE SB DUNK", "$100.000 COP", R.drawable.imgtenis, "Nike"));
-        products.add(new Product(5, "NIKE SB DUNK", "$100.000 COP", R.drawable.imgtenis, "Nike"));
+    public static List<Product> products = new ArrayList<>();
+
+    static {
+        products.add(new Product(0, "NIKE SB DUNK", "$600.000 COP", R.drawable.imgtenis, "Nike"));
+        products.add(new Product(1, "Adidas tenerife", "$190.000 COP", R.drawable.adidas, "Adidas"));
+        products.add(new Product(2, "Under Armour yellow", "$223.000 COP", R.drawable.under_amarillo, "Under Armour"));
+        products.add(new Product(3, "New Balance 527", "$547.000 COP", R.drawable.new_balance, "New Balance"));
+        products.add(new Product(4, "Lacoste Pure", "$430.000 COP", R.drawable.lacoste, "Lacoste"));
+        products.add(new Product(5, "Asics 235", "$250.000 COP", R.drawable.asics, "Asics"));
     }
-    LinearLayout productsLayout ;
+
+    LinearLayout productsLayout;
     Button carButton;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +44,17 @@ public class MainActivity extends AppCompatActivity {
         productsLayout = findViewById(R.id.products_section);
         carButton = findViewById(R.id.car_button);
         GenerateProductViews();
-        carButton.setOnClickListener(view->{
+        carButton.setOnClickListener(view -> {
             irCarrito();
         });
-
     }
-    private void  GenerateProductViews(){
+
+    private void GenerateProductViews() {
         productsLayout.removeAllViews();
         float density = getResources().getDisplayMetrics().density;
-        // Altura deseada en dp
         int heigthImage = (int) (250 * density);
-        for (Product producto : products){
+
+        for (Product producto : products) {
             LinearLayout productoLayout = new LinearLayout(this);
             productoLayout.setOrientation(LinearLayout.VERTICAL);
             productoLayout.setLayoutParams(new LinearLayout.LayoutParams(
@@ -66,12 +66,12 @@ public class MainActivity extends AppCompatActivity {
             ImageView imageView = new ImageView(this);
             imageView.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
-                    heigthImage // Altura deseada en píxeles
+                    heigthImage
             ));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setImageResource(producto.Image); // Cambia esto por la imagen real
+            imageView.setImageResource(producto.Image);
 
-            // Agregar marca(TextViews)
+            // Agregar marca (TextViews)
             TextView marcaTextView = new TextView(this);
             marcaTextView.setText(producto.Branch);
             marcaTextView.setTextSize(12);
@@ -122,17 +122,11 @@ public class MainActivity extends AppCompatActivity {
 
             // Agregar el productoLayout al LinearLayout principal
             productsLayout.addView(productoLayout);
-
         }
     }
 
-    public void irCarrito(){
+    public void irCarrito() {
         Intent intent = new Intent(this, Carrito.class);
         startActivity(intent);
     }
 }
-
-
-
-
-

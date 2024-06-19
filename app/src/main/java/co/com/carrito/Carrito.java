@@ -43,6 +43,7 @@ public class Carrito extends AppCompatActivity {
         int heigthImage = (int) (250 * density);
         List<Product> productos=carShoping.getProducts();
         LinearLayout productoLayout = new LinearLayout(this);
+        double totalPrice = 0.0;
         if (productos.size() == 0){
             ImageView imageView = new ImageView(this);
             imageView.setLayoutParams(new LinearLayout.LayoutParams(
@@ -90,6 +91,9 @@ public class Carrito extends AppCompatActivity {
                 productoLayout.addView(modeloTextView);
                 productoLayout.addView(precioTextView);
 
+                totalPrice += Double.parseDouble(producto.Price.replace("$", "").replace(",", "").replace("COP",""));
+
+
                 Button carritoButton = new Button(this);
                 carritoButton.setText("Eliminar");
                 carritoButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
@@ -113,6 +117,12 @@ public class Carrito extends AppCompatActivity {
 
 
             }
+            TextView totalTextView = new TextView(this);
+            totalTextView.setText("Total: $" + String.format("%,.2f", totalPrice) + " COP");
+            totalTextView.setTextSize(20);
+            totalTextView.setGravity(Gravity.END);
+            totalTextView.setTextColor(ContextCompat.getColor(this, android.R.color.holo_blue_dark));
+            productoLayout.addView(totalTextView);
         }
         productsLayout.addView(productoLayout);
 
