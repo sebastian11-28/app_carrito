@@ -98,6 +98,7 @@ public class Carrito extends AppCompatActivity {
                             .filter(x -> x.Id == producto.Id)
                             .findFirst();
                     carShoping.removeProduct(productoEncontrado.get());
+                    GenerateProductViews();
 
                 });
 
